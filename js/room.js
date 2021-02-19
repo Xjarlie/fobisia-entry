@@ -10,7 +10,7 @@ class Room {
         this.west;
     }
 
-    enterRoom() {
+    enter() {
         terminal.print('You enter ' + this.name + '.');
         terminal.print(this.description);
         if (this.north) {
