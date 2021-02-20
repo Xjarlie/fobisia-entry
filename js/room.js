@@ -10,9 +10,14 @@ class Room {
         this.west;
     }
 
-    enter() {
+    enter(player) {
+        player.room = this; // Updates the player's room property
+
+        terminal.print('\n-------------------')
         terminal.print('You enter ' + this.name + '.');
         terminal.print(this.description);
+
+        // Prints what rooms are surrounding it
         if (this.north) {
             terminal.print('To the north there is ' + this.north.name + '.');
         }
