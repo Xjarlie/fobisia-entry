@@ -7,6 +7,8 @@ class Player {
         this.attackStrength;
         this.blockStrength;
         this.room;
+        this.encounter = null;
+        this.spell = '';
     }
 
     kill() {

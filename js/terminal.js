@@ -37,6 +37,10 @@ class Terminal {
         document.getElementById(this.input).contentEditable = true;
     }
 
+    denyInput() {
+        document.getElementById(this.input).contentEditable = false;
+    }
+
     clearInput() { // Erases the text in the input textbox
         document.getElementById(this.input).textContent = null;
     }

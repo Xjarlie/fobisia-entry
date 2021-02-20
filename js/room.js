@@ -2,6 +2,7 @@ class Room {
     constructor(name) {
         this.name = name || '';
         this.description = '';
+        this.textHandler;  // A custom text function for any room-specific commands
         this.commands = {};
         this.enemies = {};
         this.north;
