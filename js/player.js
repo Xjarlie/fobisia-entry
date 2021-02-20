@@ -25,4 +25,8 @@ class Player {
             terminal.print('You cannot travel to the ' + direction); // Blocks player from travelling to nonexistent rooms Eg. 'You cannot travel to the north'
         }
     }
+
+    useSpell(enemy) {
+        
+    }
 }

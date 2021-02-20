@@ -32,3 +32,9 @@ function handleCommand(command) {
     }
     terminal.clearInput();
 }
+
+
+function encounter() {
+    terminal.denyInput();
+    terminal.print('hello')
+}
