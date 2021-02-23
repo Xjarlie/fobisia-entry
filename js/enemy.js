@@ -1,10 +1,14 @@
 class Enemy {
-    constructor(name) {
-        this.name = name || '';
-        this.defeated = false;
-        this.health;
-        this.attackStrength;
-        this.blockStrength;
-        this.room;
-    }
+  constructor(name) {
+    this.name = name || '';
+    this.defeated = false;
+    this.health;
+    this.attackStrength;
+    this.blockStrength;
+    this.room;
+  }
+
+  onDefeat() { // We will add this per enemy
+
+  }
 }

@@ -1,48 +1,49 @@
 class Terminal {
-    constructor(id, input, textHandler) {
-        this.id = id;
-        this.input = input;
-        this.textHandler = textHandler;
+  constructor(id, input, textHandler) {
+    this.id = id;
+    this.input = input;
+    this.textHandler = textHandler;
 
-        document.getElementById(this.input).addEventListener('keydown', function(e) { // Checks if the user presses the enter key and does the inputted function
-            if (e.keyCode == 13) {
-                e.preventDefault();
-                
-                var command = document.getElementById(input).textContent;
-                this.clearInput();
-                window[textHandler](command);
-            }
-        });
-    }
+    document.getElementById(this.input).addEventListener('keydown', function (e) { // Checks if the user presses the enter key and does the inputted function
+      if (e.keyCode == 13) {
+        e.preventDefault();
 
-    print(text) { // Prints a line or a block of text to the terminal, followed by \n, a line break
-        document.getElementById(this.id).textContent += text + '\n'; 
-    }
+        var command = document.getElementById(input).textContent;
 
-    textColor(color) { // Sets the text colour of the entire terminal to the one specified
-        this.color = color;
-        document.getElementById(this.id).style.color = this.color;
-    }
+        terminal.clearInput();
+        window[textHandler](command);
+      }
+    });
+  }
 
-    backColor(color) { // Sets the background color of the terminal to the one specified
-        this.backgroundColor = color;
-        document.getElementById(this.id).style.backgroundColor = this.backgroundColor;
-        document.body.style.backgroundColor = this.backgroundColor;
-    }
+  print(text) { // Prints a line or a block of text to the terminal, followed by \n, a line break
+    document.getElementById(this.id).textContent += text + '\n';
+  }
 
-    clear() { // Erases all the text in the terminal
-        document.getElementById(this.id).textContent = '';
-    }
+  textColor(color) { // Sets the text colour of the entire terminal to the one specified
+    this.color = color;
+    document.getElementById(this.id).style.color = this.color;
+  }
 
-    allowInput() { // Allows the user to type in the input box
-        document.getElementById(this.input).contentEditable = true;
-    }
+  backColor(color) { // Sets the background color of the terminal to the one specified
+    this.backgroundColor = color;
+    document.getElementById(this.id).style.backgroundColor = this.backgroundColor;
+    document.body.style.backgroundColor = this.backgroundColor;
+  }
 
-    denyInput() {
-        document.getElementById(this.input).contentEditable = false;
-    }
+  clear() { // Erases all the text in the terminal
+    document.getElementById(this.id).textContent = '';
+  }
 
-    clearInput() { // Erases the text in the input textbox
-        document.getElementById(this.input).textContent = null;
-    }
+  allowInput() { // Allows the user to type in the input box
+    document.getElementById(this.input).contentEditable = true;
+  }
+
+  denyInput() {
+    document.getElementById(this.input).contentEditable = false;
+  }
+
+  clearInput() { // Erases the text in the input textbox
+    document.getElementById(this.input).textContent = null;
+  }
 }
