@@ -7,8 +7,9 @@ class Terminal {
         document.getElementById(this.input).addEventListener('keydown', function(e) { // Checks if the user presses the enter key and does the inputted function
             if (e.keyCode == 13) {
                 e.preventDefault();
-
+                
                 var command = document.getElementById(input).textContent;
+                this.clearInput();
                 window[textHandler](command);
             }
         });
@@ -33,7 +34,7 @@ class Terminal {
         document.getElementById(this.id).textContent = '';
     }
 
-    allowInput() { // Allows the user to type in the input box (unused so far)
+    allowInput() { // Allows the user to type in the input box
         document.getElementById(this.input).contentEditable = true;
     }
 

@@ -2,8 +2,9 @@ function crematoriumCommands(command) { // The function to handle crematorium-sp
     switch (command) {
         case 'say hello':
             terminal.print('You say hello to the beggar. He takes this as a personal attack, stands up, and punches you');
-            var beggar = new Enemy('the beggar');
             return true;
+        default:
+          return false;
     }
 }
 

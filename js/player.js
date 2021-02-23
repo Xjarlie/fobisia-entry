@@ -8,7 +8,7 @@ class Player {
         this.blockStrength;
         this.room;
         this.encounter = null;
-        this.spell = '';
+        this.spells = [];
     }
 
     kill() {
@@ -26,7 +26,7 @@ class Player {
         }
     }
 
-    useSpell(enemy) {
-        
+    useSpell(encounter) {
+        if ()
     }
 }

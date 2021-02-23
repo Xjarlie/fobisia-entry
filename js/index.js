@@ -1,14 +1,15 @@
-var terminal = new Terminal('log', 'terminal-input', 'handleCommand');
-var input = document.getElementById('terminal-input');
+const terminal = new Terminal('log', 'terminal-input', 'handleCommand');
+const input = document.getElementById('terminal-input');
 
-var player = new Player('Xjarlie');
+const player = new Player('Xjarlie');
+player.attackStrength = 3;
+player.blockStrength = 40;
 
-
-var crematorium = new Room('the crematorium');
+const crematorium = new Room('the crematorium');
 crematorium.description = 'It is a spooky place, filled with the rotting remains of people long gone.';
 crematorium.textHandler = 'crematoriumCommands';
 
-var street = new Room('a dusty street');
+const street = new Room('a dusty street');
 crematorium.north = street;
 street.south = crematorium;
 street.textHandler = 'streetCommands';
@@ -16,6 +17,7 @@ street.textHandler = 'streetCommands';
 crematorium.enter(player);
 
 function handleCommand(command) {
+    terminal.print('> ' + command);
     if (player.encounter) { // Checks to see if the player is in an encounter (eg, a battle)
         player.encounter.handleCommand(command); // If player is in an encounter, pass off the command to that encounter to deal with
     } else {
@@ -30,11 +32,11 @@ function handleCommand(command) {
             }
         }
     }
-    terminal.clearInput();
 }
 
+var beggar = new Enemy('the beggar');
+beggar.health = 20;
+beggar.attackStrength = 2;
+beggar.blockStrength = 30;
 
-function encounter() {
-    terminal.denyInput();
-    terminal.print('hello')
-}
+var encounter = new Encounter(player, beggar);

@@ -20,16 +20,16 @@ class Room {
 
         // Prints what rooms are surrounding it
         if (this.north) {
-            terminal.print('To the north there is ' + this.north.name + '.');
+            terminal.print('To the north is ' + this.north.name + '.');
         }
         if (this.east) {
-            terminal.print('To the east there is ' + this.east.name + '.');
+            terminal.print('To the east is ' + this.east.name + '.');
         }
         if (this.south) {
-            terminal.print('To the south there is ' + this.south.name + '.');
+            terminal.print('To the south is ' + this.south.name + '.');
         }
         if (this.west) {
-            terminal.print('To the west there is ' + this.west.name + '.');
+            terminal.print('To the west is ' + this.west.name + '.');
         }
     }
 }
