@@ -4,18 +4,21 @@ class Room {
     this.description = '';
     this.textHandler;  // A custom text function for any room-specific commands
     this.commands = {};
-    this.enemies = {};
+    this.enemy;
     this.north;
     this.east;
     this.south;
     this.west;
+    this.container;
   }
 
   enter(player) {
     player.room = this; // Updates the player's room property
 
+    terminal.clear();
+
     terminal.print('\n-------------------')
-    terminal.print('You enter ' + this.name + '.');
+    //terminal.print('You enter ' + this.name + '.');
     terminal.print(this.description);
 
     // Prints what rooms are surrounding it
@@ -30,6 +33,18 @@ class Room {
     }
     if (this.west) {
       terminal.print('To the west is ' + this.west.name + '.');
+    }
+
+
+    if (this.enemy) {
+
+      terminal.print('There is an enemy here: ' + this.enemy.name + '.');
+
+      var encounter = new Encounter(player, this.enemy);
+      terminal.denyInput();
+      setTimeout(function() {
+        encounter.begin();
+      }, 3000)
     }
   }
 }

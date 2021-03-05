@@ -17,7 +17,8 @@ class Terminal {
   }
 
   print(text) { // Prints a line or a block of text to the terminal, followed by \n, a line break
-    document.getElementById(this.id).textContent += text + '\n';
+    document.getElementById(this.id).innerHTML += text + '\n';
+    window.scrollTo(0,document.body.scrollHeight);
   }
 
   textColor(color) { // Sets the text colour of the entire terminal to the one specified
@@ -45,5 +46,17 @@ class Terminal {
 
   clearInput() { // Erases the text in the input textbox
     document.getElementById(this.input).textContent = null;
+  }
+
+  getText() {
+    return document.getElementById(this.id).textContent;
+  }
+
+  setText(text) {
+    document.getElementById(this.id).textContent = text;
+  }
+
+  focus() {
+    document.getElementById(this.input).focus({preventScroll:false});
   }
 }

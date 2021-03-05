@@ -6,6 +6,7 @@ class Enemy {
     this.attackStrength;
     this.blockStrength;
     this.room;
+    this.ai;
   }
 
   onDefeat() { // We will add this per enemy

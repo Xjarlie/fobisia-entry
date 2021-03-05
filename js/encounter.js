@@ -2,16 +2,21 @@ class Encounter {
   constructor(player, enemy) {
     this.player = player;
     this.enemy = enemy;
-    this.enemyAI;
+    this.enemyAI = enemy.ai;
     this.playerDamage = 0;
     this.playerDefense = 0;
     this.enemyDamage = 0;
     this.enemyDefense = 0;
     this.repeatingEffects = {};
+    this.terminalBefore = ''; // The text that was in the terminal before the encounter began
+    this.over = false;
   }
 
   begin() {
     terminal.denyInput();
+
+    this.terminalBefore = terminal.getText();
+    terminal.clear();
 
     this.player.encounter = this;
     terminal.print('\n-------------------');
@@ -33,12 +38,26 @@ class Encounter {
         this.beginTurn(this.enemy);
         break;
       case 'spell':
-        if (this.player.useSpell(encounter)) {
+        console.log('here');
+        if (this.player.useSpell(this)) {
           this.beginTurn(this.enemy);
+          
         } else {
           terminal.print('You do not have a spell, or it is out of uses.')
           terminal.allowInput();
         }
+        break;
+      case 'proceed':
+
+        if (this.over) {
+          this.player.encounter = null;
+
+          terminal.clear();          
+          terminal.setText(this.terminalBefore);
+        } else {
+          terminal.print('The encounter is not yet over, you coward.');
+        }
+        terminal.allowInput();
         break;
       default:
         terminal.print('You cannot do that while in an encounter.');
@@ -78,9 +97,10 @@ class Encounter {
 
         // Calculate spell effects:
         for (const [key, value] of Object.entries(this.repeatingEffects)) {
-          value.repeted++;
+
+          value.repeated++;
           if (value.repeated > value.repeat) {
-            this.repeatingEffects[key] = null;
+            delete this.repeatingEffects[key];
           } else {
             value.effect(this);
           }
@@ -96,16 +116,22 @@ class Encounter {
         this.player.health = Math.round(this.player.health);
         this.enemy.health = Math.round(this.enemy.health);
 
+
+
         // Calculate dead:
         if (this.player.health <= 0) {
           terminal.print('You were killed by ' + this.enemy.name + '.');
           this.player.kill();
+          this.end();
         } else if (this.player.stamina <= 0) {
           terminal.print('You ran out of stamina.');
           this.player.kill();
+          this.end();
         } else if (this.enemy.health <= 0) {
+          terminal.print('You have defeated ' + this.enemy.name)
           this.enemy.defeated = true;
           this.enemy.onDefeat();
+          this.end();
         } else {
           terminal.print('--Health: ' + this.player.health);
           terminal.print('--Stamina: ' + this.player.stamina);
@@ -122,11 +148,14 @@ class Encounter {
         this.enemyDamage = 0;
         terminal.print('It is your turn - type \'attack\', \'defend\' or \'spell\'');
         terminal.allowInput();
+        terminal.focus();
     }
   }
 
   end() {
-    this.player.encounter = null;
+    this.over = true;
+
+    terminal.print('<b>This encounter has ended. Type "proceed" to exit.</b>')
     terminal.allowInput();
   }
 
