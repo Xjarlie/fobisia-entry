@@ -54,8 +54,14 @@ class Encounter {
           if (this.enemy = boss && this.enemy.defeated) {
             this.enemy.onDefeat();
           } else {
-            terminal.clear();
-          terminal.setText(this.terminalBefore);
+            if (this.player.room == bossRoom) {
+              terminal.clear();
+              startRoom.enter(player);
+            } else {
+              terminal.clear();
+              terminal.setText(this.terminalBefore);  
+            }
+            
           }
           
         } else {

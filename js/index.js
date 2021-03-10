@@ -4,7 +4,9 @@ const input = document.getElementById('terminal-input');
 const player = new Player('Player');
 player.attackStrength = 3;
 player.blockStrength = 40;
-
+player.kill = function() {
+  reload();
+}
 
 function handleCommand(command) {
   terminal.print('> ' + command);
