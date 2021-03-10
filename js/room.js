@@ -21,18 +21,20 @@ class Room {
     //terminal.print('You enter ' + this.name + '.');
     terminal.print(this.description);
 
+    terminal.print('');
+
     // Prints what rooms are surrounding it
     if (this.north) {
-      terminal.print('To the north is ' + this.north.name + '.');
+      terminal.print('You can travel north.');
     }
     if (this.east) {
-      terminal.print('To the east is ' + this.east.name + '.');
+      terminal.print('You can travel east.');
     }
     if (this.south) {
-      terminal.print('To the south is ' + this.south.name + '.');
+      terminal.print('You can travel south.');
     }
     if (this.west) {
-      terminal.print('To the west is ' + this.west.name + '.');
+      terminal.print('You can travel west.');
     }
 
 

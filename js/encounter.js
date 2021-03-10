@@ -51,9 +51,13 @@ class Encounter {
 
         if (this.over) {
           this.player.encounter = null;
-
-          terminal.clear();          
+          if (this.enemy = boss && this.enemy.defeated) {
+            this.enemy.onDefeat();
+          } else {
+            terminal.clear();
           terminal.setText(this.terminalBefore);
+          }
+          
         } else {
           terminal.print('The encounter is not yet over, you coward.');
         }
@@ -130,7 +134,7 @@ class Encounter {
         } else if (this.enemy.health <= 0) {
           terminal.print('You have defeated ' + this.enemy.name)
           this.enemy.defeated = true;
-          this.enemy.onDefeat();
+          // this.enemy.onDefeat();
           this.end();
         } else {
           terminal.print('--Health: ' + this.player.health);

@@ -21,8 +21,8 @@ function handleCommand(command) {
           player.travel(command);
           break;
         case 'win game':
-        terminal.print('Congratulations! You have won the game!');
-          setTimeout(function() {
+          terminal.print('Congratulations! You have won the game!');
+          setTimeout(function () {
             terminal.print('<iframe id="rick" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
             document.getElementById('rick').click();
           }, 3000);
@@ -37,41 +37,57 @@ function handleCommand(command) {
   terminal.focus();
 }
 
+function reload() {
+  window.location.reload();  
+}
+
+
 // ENEMIES
 
 const boss = new Enemy('The Boss');
 boss.ai = 'bossAI';
-boss.health = 30;
+boss.health = 40;
 boss.attackStrength = 3;
-boss.blockStrength = 50;
+boss.blockStrength = 50
 
-const grunt1 = new Enemy('Grunt 1');
+boss.onDefeat = function() {
+  terminal.clear();
+  terminal.denyInput();
+  terminal.print('Congratulations, you have defeated the boss and won the game!');
+  setTimeout(function() {
+    reload();
+  }, 3000);
+}
+
+
+const grunt1 = new Enemy('a Servant of The Light');
 grunt1.health = 10;
 grunt1.blockStrength = 35;
 grunt1.attackStrength = 2;
 
-const grunt2 = new Enemy('Grunt 2');
+const grunt2 = new Enemy('a Servant of the Light');
 grunt2.health = 10;
 grunt2.blockStrength = 35;
 grunt2.attackStrength = 2;
+
 // SPELLS
 
 const petram = new Spell('Petram');
-petram.effect = function(encounter) {
+petram.effect = function (encounter) {
   encounter.playerDefense = 60;
 }
 petram.repeat = 6;
 
 const cinis = new Spell('Cinis');
-cinis.effect = function(encounter) {
+cinis.effect = function (encounter) {
   encounter.enemyDefense = 0;
   encounter.playerDamage = 13;
 }
 cinis.repeat = 1;
 
 const orbisFinnis = new Spell('Orbis Finnis');
-orbisFinnis.effect = function(encounter) {
-  
+orbisFinnis.effect = function (encounter) {
+
 }
 
 
@@ -80,6 +96,7 @@ orbisFinnis.effect = function(encounter) {
 
 const bossRoom = new Room('Room 1');
 bossRoom.enemy = boss;
+bossRoom.textHandler = 'roomCommands';
 
 const startRoom = new Room('Room 3');
 startRoom.description = 'You wake up in the middle of a strange intersection in front of a titanic gate made of two massive slabs of stone and giant sequoia wood which must span a few hundred metres. \n You have a strange buzz going through your head warning you of something you can\'t pinpoint, so you brush off the dust on your cloak and decide if you follow the road east or west.';
@@ -98,23 +115,25 @@ room5.textHandler = 'room5Commands';
 room5.description = 'you have walked for hours and you see a tower which seems familiar to you and you ponder over if you should continue or follow the road further south. [Type "in" or type "south"]';
 
 const room6 = new Room('Room 6');
-room6.description = "You have walked for hours at this point and you find yourself in a dense wooded area, as you continue down the path you encounter a deep hole going down to earth's mantle and floating at ground level there is a small stone house. Do you investigate or do you carry on going south on the road?";
+room6.description = "You have walked for hours at this point and you find yourself in a dense wooded area, as you continue down the path you encounter a deep hole going down to earth's mantle and floating at ground level there is a small stone house. Do you investigate or do you carry on going south on the road? [Type IN]";
 room6.textHandler = 'room6Commands';
 
 const room7 = new Room('Room 7');
 room7.description = "as you walk the dirt road, you stop to  think about your motivation to walk onward but as you stop an angry servant of the light jumps out of the bushes to kill you.";
 room7.textHandler = 'roomCommands';
+room7.enemy = grunt2;
 
 const room8 = new Room('Room 8');
-room8.description = " After you defeated the servant of the light, you turned as the path did so and you saw a large opening with a city full of people, dogs, griffins, horses and minotaurs. You hastily ran to the city to look for clues. Most of the buildings were massive but one stook out because it was just like the structure you encountered earlier. Do you go inside or do you go east or west.";
+room8.description = " After you defeated the servant of the light, you turned as the path did so and you saw a large opening with a city full of people, dogs, griffins, horses and minotaurs. You hastily ran to the city to look for clues. Most of the buildings were massive but one stook out because it was just like the structure you encountered earlier. Do you go inside [TYPE IN], or do you go east or west.";
 room8.textHandler = 'room8Commands';
 
 const room9 = new Room('Room 9');
 room9.description = "You are still walking down the same dirt path bust as you do a servant of the light jumps down from a tree and tries to kill you for its master.";
 room9.textHandler = 'roomCommands';
+room9.enemy = grunt1;
 
 const room10 = new Room('Room 10');
-room10.description = "You enter  structure and you feel like you have been there once before. You look around and you seem to know the layout of the very peculiar room which seems to boggle your mind. You see a staircase and you go to it to see how far up it goes but as you look it seems to go on for an unimaginable height. As you walk up the stairs you wonder on how long it will take you to scale them. As that thought popped into you mind, in a blink of an eye you appear in a room. You panic and see a window so you look out of the window and you see yourself on the stairs. You figure that this is some sort of gateway. Out of nowhere, an old man in a robe with pale skin materializes in front of you. He whispers into you ear. Your eyes widen and you understand. Now you know what was behind that faithful gate. Something horrifying, something which has been forgotten in time. The old man told you two words which echoed through time. You could feel it in your bones. Orbis finis.";
+room10.description = "You enter  structure and you feel like you have been there once before. You look around and you seem to know the layout of the very peculiar room which seems to boggle your mind. You see a staircase and you go to it to see how far up it goes but as you look it seems to go on for an unimaginable height. As you walk up the stairs you wonder on how long it will take you to scale them. As that thought popped into you mind, in a blink of an eye you appear in a room. You panic and see a window so you look out of the window and you see yourself on the stairs. You figure that this is some sort of gateway. Out of nowhere, an old man in a robe with pale skin materializes in front of you. He whispers into you ear. Your eyes widen and you understand. Now you know what was behind that faithful gate. Something horrifying, something which has been forgotten in time. The old man told you two words which echoed through time. You could feel it in your bones. <b>Orbis finis.</b>";
 room10.textHandler = 'room10Commands';
 
 

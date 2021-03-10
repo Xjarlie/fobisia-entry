@@ -8,17 +8,20 @@ class Terminal {
       if (e.keyCode == 13) {
         e.preventDefault();
 
-        var command = document.getElementById(input).textContent;
-
+        var command = document.getElementById(input).textContent.toLowerCase();
+        
         terminal.clearInput();
-        window[textHandler](command);
+        if (command) {
+          window[textHandler](command);  
+        }
+        
       }
     });
   }
 
   print(text) { // Prints a line or a block of text to the terminal, followed by \n, a line break
     document.getElementById(this.id).innerHTML += text + '\n';
-    window.scrollTo(0,document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   textColor(color) { // Sets the text colour of the entire terminal to the one specified
@@ -57,6 +60,6 @@ class Terminal {
   }
 
   focus() {
-    document.getElementById(this.input).focus({preventScroll:false});
+    document.getElementById(this.input).focus({ preventScroll: false });
   }
 }
