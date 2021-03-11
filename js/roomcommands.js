@@ -93,9 +93,11 @@ function room6Commands(command) {
 }
 
 function room8Commands(command) {
+  console.log('yes');
   switch(command) {
     case 'in':
-      player.travel('south');
+      room10.enter(player);
+      startRoom.north = bossRoom;
       return true;
       break;
     default:
@@ -105,4 +107,10 @@ function room8Commands(command) {
 
 function roomCommands() {
   return false;
+}
+
+function room10Commands(command) {
+  switch (command) {
+    
+  }
 }

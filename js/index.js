@@ -126,7 +126,7 @@ room7.textHandler = 'roomCommands';
 room7.enemy = grunt2;
 
 const room8 = new Room('Room 8');
-room8.description = " After you defeated the servant of the light, you turned as the path did so and you saw a large opening with a city full of people, dogs, griffins, horses and minotaurs. You hastily ran to the city to look for clues. Most of the buildings were massive but one stook out because it was just like the structure you encountered earlier. Do you go inside [TYPE IN], or do you go east or west.";
+room8.description = " After you defeated the servant of the light, you turned as the path did so and you saw a large opening with a city full of people, dogs, griffins, horses and minotaurs. You hastily ran to the city to look for clues. Most of the buildings were massive but one stook out because it was just like the structure you encountered earlier. Do you go inside <b>[type 'in']</b>, or do you go east or west.";
 room8.textHandler = 'room8Commands';
 
 const room9 = new Room('Room 9');
@@ -142,7 +142,7 @@ room10.textHandler = 'room10Commands';
 
 // ROOM DIRECTIONS
 
-startRoom.north = bossRoom;
+//startRoom.north = bossRoom;
 bossRoom.south = startRoom;
 startRoom.east = room4;
 room4.west = startRoom;
@@ -159,7 +159,8 @@ room5.south = room7;
 room7.north = room5;
 room7.east = room8;
 room8.west = room7;
-room8.south = room10;
+// room8.south = room10;
+room10.north = room8;
 
 
 
